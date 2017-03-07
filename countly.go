@@ -2,7 +2,6 @@ package countly
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -61,11 +60,6 @@ func (c *Client) do(method, path string, values url.Values, v interface{}) error
 		return err
 	}
 	defer resp.Body.Close()
-
-	response, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
 
 	return json.NewDecoder(resp.Body).Decode(&v)
 }
